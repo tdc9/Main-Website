@@ -1,0 +1,31 @@
+{
+  "name": "an1mehaven",
+  "version": "1.0.0",
+  "description": "A anime Wiki Website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tdc9/An1meHaven.git"
+  },
+  "author": "TDC9",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tdc9/An1meHaven/issues"
+  },
+  "homepage": "https://github.com/tdc9/An1meHaven#readme",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "cookie-parser": "^1.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.17.0",
+    "mongoose": "^8.9.3",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^3.1.9"
+  }
+}

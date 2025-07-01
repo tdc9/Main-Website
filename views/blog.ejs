@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/css/bootstrap.ejs') %>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ionn. \  <%= blog.title %></title>
+    <link rel="icon" type="image/x-icon" href="https://i.ibb.co/Tx2ScBj6/favicon.jpg">
+    <style>
+        .blog-layout {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            margin-top: 40px;
+        }
+        .blog-text {
+            flex: 2 1 350px;
+            min-width: 300px;
+            max-width: 700px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+         nav:empty, .navbar:empty {
+    display: none;
+}
+        .blog-image-container {
+            flex: 1 1 320px;
+            min-width: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .blog-image-sticky {
+            position: sticky;
+            top: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .blog-image-sticky img {
+            max-width: 340px;
+            max-height: 420px;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(60,72,88,0.12), 0 1.5px 4px rgba(60,72,88,0.08);
+            background: #f8fafc;
+            object-fit: cover;
+        }
+        .blog-meta {
+            font-size: smaller;
+            color: #6c757d;
+            margin-bottom: 16px;
+        }
+        .comments-section {
+            margin-top: 48px;
+        }
+        .comment-card {
+            background: #f5f7fa;
+            border: 1.5px solid #e0e4ea;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(60,72,88,0.08);
+            margin-bottom: 18px;
+        }
+        @media (max-width: 900px) {
+            .blog-layout {
+                flex-direction: column;
+                align-items: center;
+            }
+            .blog-image-sticky {
+                position: static;
+                margin-bottom: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <%- include('./partials/components/nav.ejs') %>
+    <div class="container">
+        <% if (locals.user && user.role == "Admin") { %>
+            <form action="/blog/delete/<%=blog._id%>" method="POST" style="display:inline;">
+                <button class="btn btn-danger" type="submit">Delete Blog</button>
+            </form>
+        <% } %>
+        <div class="blog-layout">
+            <div class="blog-text">
+                <h1 class="mt-3 mb-2"><%=blog.title%></h1>
+                <div class="blog-meta">
+                    By <%= blog.author.fullName %>
+                </div>
+                <div class="mb-4" style="white-space: pre-line;"><%=blog.content%></div>
+            </div>
+            <div class="blog-image-container">
+                <div class="blog-image-sticky">
+                    <img src="<%=blog.coverImage%>" alt="animelogo">
+                </div>
+            </div>
+        </div>
+        <div class="comments-section">
+            <h5 class="mt-5">Comments (<%=comments.length%>)</h5>
+            <% if (locals.user) { %>
+                <div class="mb-3 d-flex gap-2">
+                    <input id="comment-input" class="form-control" type="text" placeholder="Enter Your Comment Here">
+                    <button id="submitButton" class="btn btn-success">Post</button>
+                </div>
+            <% } %>
+            <% comments.forEach(comment => { %>
+                <div class="row my-1">
+                    <div class="col">
+                        <div class="comment-card card w-100">
+                            <div class="card-body">
+                                <p class="card-text mb-1">
+                                    <strong><%=comment.createdBy.fullName%></strong> posted:
+                                </p>
+                                <p class="card-text"><%= comment.content %></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+        <script>
+            const blogId = "<%= blog._id %>";
+            const input = document.getElementById("comment-input");
+            const btn = document.getElementById("submitButton");
+            if(btn) {
+                btn.addEventListener("click", function(e){
+                    e.preventDefault();
+                    createComment();
+                });
+            }
+            function createComment() {
+                fetch("/comment/create",{
+                    method : "POST",
+                    headers: {
+                        "Content-Type" : 'application/json',
+                    },
+                    body: JSON.stringify({blogId, content : input.value}),
+                }).then(e => window.location.reload());
+            }
+        </script>
+    </div>
+    <%- include('./partials/js/bootstrap.ejs') %>
+</body>
+</html>

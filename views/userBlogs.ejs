@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/css/bootstrap.ejs') %>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ionn.</title>
+    <link rel="icon" type="image/x-icon" href="https://i.ibb.co/Tx2ScBj6/favicon.jpg">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f8fafc 0%, #e9ecef 100%);
+            color: #23272b;
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+        }
+        .container {
+            background: #fff;
+            border-radius: 18px;
+            padding: 40px 32px;
+            margin-top: 48px;
+            box-shadow: 0 8px 32px rgba(60,72,88,0.12), 0 1.5px 4px rgba(60,72,88,0.08);
+        }
+        h3 {
+            color: #2d3a4a;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .card {
+            background: #f5f7fa;
+            color: #23272b;
+            border: 1.5px solid #e0e4ea;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(60,72,88,0.08);
+            margin-bottom: 24px;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+        .card:hover {
+            box-shadow: 0 8px 32px rgba(79,140,255,0.13);
+            transform: translateY(-4px) scale(1.02);
+        }
+        .card-title {
+            color: #2d3a4a;
+            font-weight: 600;
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #4f8cff 60%, #3762c2 100%);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            padding: 10px 32px;
+            box-shadow: 0 2px 8px rgba(79,140,255,0.08);
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(90deg, #3762c2 60%, #4f8cff 100%);
+            box-shadow: 0 4px 16px rgba(79,140,255,0.15);
+        }
+         nav:empty, .navbar:empty {
+    display: none;
+}
+        .card-img-top {
+            background: #e9ecef;
+            object-fit: cover;
+            border-top-left-radius: 14px;
+            border-top-right-radius: 14px;
+            height: 240px;
+            width: 100%;
+        }
+        .row.mt-3 {
+            justify-content: center;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 18px 6px;
+                margin-top: 18px;
+            }
+            .card {
+                width: 100% !important;
+                margin: 0 0 18px 0 !important;
+            }
+            .card-img-top {
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <%- include('./partials/components/nav.ejs') %>
+    <div class="container text-center">
+        <h3 style="margin-top: 20px;">Blogs By Me</h3>
+        <br>
+        <div class="row mt-3">
+            <% blogs.forEach(blog => { %>
+                <div class="card mx-2" style="width: 18rem;">
+                    <img src="<%=blog.coverImage%>" class="card-img-top" alt="anime image">
+                    <div class="card-body">
+                        <h5 class="card-title"><%=blog.title.slice(0,20)%></h5>
+                        <p class="card-text"><%=blog.content.slice(0,100)%>...</p>
+                        <a href="/blog/view/<%=blog._id%>" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+    <%- include('./partials/js/bootstrap.ejs') %>
+</body>
+</html>

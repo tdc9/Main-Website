@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/css/bootstrap.ejs') %>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ionn.</title>
+    <link rel="icon" type="image/x-icon" href="https://i.ibb.co/Tx2ScBj6/favicon.jpg">
+    <style>
+        nav:empty, .navbar:empty {
+            display: none;
+        }
+        body {
+            background: linear-gradient(135deg, #f8fafc 0%, #e9ecef 100%);
+            color: #23272b;
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+        }
+        .container {
+            background: #fff;
+            border-radius: 18px;
+            padding: 40px 32px;
+            margin-top: 48px;
+            box-shadow: 0 8px 32px rgba(60,72,88,0.12), 0 1.5px 4px rgba(60,72,88,0.08);
+        }
+        h2, h3 {
+            color: #2d3a4a;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        p {
+            color: #4a5568;
+            font-size: 1.08em;
+            margin-bottom: 2.5rem;
+        }
+        .card {
+            background: #f5f7fa;
+            color: #23272b;
+            border: 1.5px solid #e0e4ea;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(60,72,88,0.08);
+            margin-bottom: 24px;
+            transition: box-shadow 0.2s, transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 420px;
+        }
+        .card:hover {
+            box-shadow: 0 8px 32px rgba(79,140,255,0.13);
+            transform: translateY(-4px) scale(1.02);
+        }
+        .card-title {
+            color: #2d3a4a;
+            font-weight: 600;
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #4f8cff 60%, #3762c2 100%);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            padding: 10px 32px;
+            box-shadow: 0 2px 8px rgba(79,140,255,0.08);
+            transition: background 0.2s, box-shadow 0.2s;
+            color: #fff !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(90deg, #3762c2 60%, #4f8cff 100%);
+            box-shadow: 0 4px 16px rgba(79,140,255,0.15);
+        }
+        .card-img-top {
+            background: #e9ecef;
+            object-fit: cover;
+            border-top-left-radius: 14px;
+            border-top-right-radius: 14px;
+            height: 240px;
+            width: 100%;
+        }
+        a, a:visited {
+            color: #4f8cff;
+            text-decoration: none;
+        }
+        .row.mt-3 {
+            justify-content: center;
+        }
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
+        }
+        .mt-auto {
+            margin-top: auto !important;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 18px 6px;
+                margin-top: 18px;
+            }
+            .card {
+                width: 100% !important;
+                margin: 0 0 18px 0 !important;
+            }
+            .card-img-top {
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <%- include('./partials/components/nav.ejs') %>
+    <div class="container text-center">
+        <h2 class="mt-2">Welcome to Ionn.</h2>
+        <br>
+        <p>
+            Igniting Innovation, Crafted by Students<br>
+            We're a passionate and driven company, entirely owned and operated by a dedicated team of students. Our story began with a simple, yet powerful belief: that innovative ideas, no matter how ambitious, deserve to see the light of day. We pour our hearts and countless hours into transforming imaginative concepts into tangible, impactful solutions.
+            <br><br>
+            Every project we embrace is a testament to our commitment to hard work, meticulous attention to detail, and a relentless pursuit of excellence. We thrive on challenges, constantly pushing the boundaries of what's possible to create unique and effective experiences. We're not just developing products; we're building a foundation for the future, one inspired creation at a time.
+        </p>
+        <h3 style="margin-top: 20px;">Latest Blogs</h3>
+        <br>
+        <div class="row mt-3">
+            <% blogs.forEach(blog => { %>
+                <div class="card mx-2" style="width: 18rem;">
+                    <img src="<%=blog.coverImage%>" class="card-img-top" alt="anime image">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title"><%=blog.title.slice(0,20)%></h5>
+                        <p class="card-text"><%=blog.content.slice(0,100)%>...</p>
+                        <div class="mt-auto">
+                            <a href="/blog/view/<%=blog._id%>" class="btn btn-primary w-100">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+    <%- include('./partials/js/bootstrap.ejs') %>
+</body>
+</html>

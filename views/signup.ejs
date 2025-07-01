@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/css/bootstrap.ejs') %>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ionn.</title>
+    <link rel="icon" type="image/x-icon" href="https://i.ibb.co/Tx2ScBj6/favicon.jpg">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f8fafc 0%, #e9ecef 100%);
+            color: #23272b;
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+        }
+        .container {
+            background: #fff;
+            border-radius: 18px;
+            padding: 40px 32px;
+            margin-top: 48px;
+            box-shadow: 0 8px 32px rgba(60,72,88,0.12), 0 1.5px 4px rgba(60,72,88,0.08);
+            max-width: 420px;
+        }
+        h1 {
+            color: #2d3a4a;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .form-label {
+            color: #4f8cff;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .form-control {
+            background: #f5f7fa;
+            color: #23272b;
+            border: 1.5px solid #e0e4ea;
+            border-radius: 8px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .form-control:focus {
+            border-color: #4f8cff;
+            box-shadow: 0 0 0 0.15rem rgba(79,140,255,.15);
+            background: #fff;
+        }
+        .form-text {
+            color: #7b8a99;
+            font-size: 0.95em;
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #4f8cff 60%, #3762c2 100%);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            padding: 10px 32px;
+            box-shadow: 0 2px 8px rgba(79,140,255,0.08);
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+         nav:empty, .navbar:empty {
+    display: none;
+}
+        .btn-primary:hover {
+            background: linear-gradient(90deg, #3762c2 60%, #4f8cff 100%);
+            box-shadow: 0 4px 16px rgba(79,140,255,0.15);
+        }
+        .login-link {
+            color: #4f8cff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .login-link:hover {
+            color: #3762c2;
+            text-decoration: underline;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 18px 6px;
+                margin-top: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <%- include('./partials/components/nav.ejs') %>
+    <div class="container text-center">
+        <h1 class="my-4">Create A Free Account</h1>
+        <form method="post" action="/user/signup">
+            <div class="mb-3 text-start">
+                <label for="fullnameInput" class="form-label">Full Name</label>
+                <input name="fullName" type="text" class="form-control" id="fullnameInput" aria-describedby="fullnameHelp" required>
+                <div id="fullnameHelp" class="form-text">What Can We Call You?</div>
+            </div>
+            <div class="mb-3 text-start">
+                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3 text-start">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input name="password" type="password" class="form-control" id="exampleInputPassword1" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Submit</button>
+        </form>
+        <h3 class="my-5 text-center" style="font-size: 1.1em; font-weight: 400;">
+            Have an account?
+            <a href="/login" class="login-link">Login</a>
+        </h3>
+    </div>
+    <%- include('./partials/js/bootstrap.ejs') %>
+</body>
+</html>
